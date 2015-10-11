@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<style>
+
+body{
+  font-size:0px;
+  cursor:default;
+  
+  background:rgb(250,250,250);
+}
+
+.header{
+  background:rgba(255,255,255,0.95);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  
+  padding:20px 50px;
+}
+.header .logo{
+  display:inline-block;
+  vertical-align:middle;
+  
+  height:60px;
+  
+  margin-right:30px;
+}
+.header .title{
+  display:inline-block;
+  vertical-align:middle;
+  
+  color:rgb(150,150,150);
+  font-size: 15px;
+  font-weight:500;
+  
+  text-transform:uppercase;
+}
+
+.content{
+  max-width:1200px;
+  margin:20px auto;
+  padding:50px;
+  
+  text-align:center;
+}
+.content .card{
+  display:inline-block;
+  vertical-align:top;
+  
+  width:300px;
+  height:480px;
+  
+  background-color:white;
+  color:rgba(0,0,0,0.7);
+  
+  padding:15px;
+  margin:10px;
+  
+  overflow:hidden;
+  
+  animation: bounce-in-animation 1000ms linear;
+}
+.content .card:hover{
+  animation: bounce-out-animation 1000ms linear;
+  transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.content .card.new{
+  background:#4cb1e4;
+  color:rgba(255,255,255,0.8);
+}
+.content .card h1{
+  margin:0px;
+  padding:40px 0px 8px 0px;
+  
+  color:rgb(0,0,0);
+  font-size:40px;
+  font-weight:600;
+}
+.content .card.new h1{
+  color:rgb(255,255,255);
+}
+.content .card.new h2{
+  color:rgba(0,0,0,0.7);
+}
+.content .card h2{
+  margin:0px;
+  padding:0px;
+  
+  color:rgb(45,135,181);
+  font-size:22px;
+  font-weight:500;
+}
+.content .card h3{
+  margin:8px 0px;
+  padding:0px;
+
+  font-size:16px;
+  font-weight:400;
+  font-style:italic;
+}
+.content .card.new .line{
+  background:rgb(255,255,255);
+}
+.content .card .line{
+  display:block;
+  
+  height:1px;
+  background:rgb(0,0,0);
+  
+  margin:30px 90px;
+}
+.content .card p{
+  margin:0px 30px;
+  
+  font-size:16px;
+  line-height:20px;
+}
+.content .card a:hover{
+  color:rgba(0,0,0,0.4);
+}
+.content .card.new a:hover{
+  color:rgba(255,255,255,0.5);
+}
+
+
+
+@keyframes bounce-in-animation { 
+  0% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  3.4% { transform: matrix3d(1.017, 0, 0, 0, 0, 1.015, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.7% { transform: matrix3d(1.014, 0, 0, 0, 0, 1.01, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  6.81% { transform: matrix3d(1.009, 0, 0, 0, 0, 1.003, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  9.41% { transform: matrix3d(1.003, 0, 0, 0, 0, 0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  10.21% { transform: matrix3d(1.001, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  13.61% { transform: matrix3d(0.997, 0, 0, 0, 0, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  14.11% { transform: matrix3d(0.996, 0, 0, 0, 0, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  17.52% { transform: matrix3d(0.995, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  18.72% { transform: matrix3d(0.995, 0, 0, 0, 0, 0.995, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  21.32% { transform: matrix3d(0.995, 0, 0, 0, 0, 0.998, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  24.32% { transform: matrix3d(0.996, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  25.23% { transform: matrix3d(0.997, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  29.03% { transform: matrix3d(0.998, 0, 0, 0, 0, 1.003, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  29.93% { transform: matrix3d(0.999, 0, 0, 0, 0, 1.003, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  35.54% { transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  36.74% { transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  41.04% { transform: matrix3d(1.001, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  44.44% { transform: matrix3d(1.001, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  52.15% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  59.86% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  63.26% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  75.28% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  85.49% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  90.69% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+
+
+@keyframes bounce-out-animation { 
+  0% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  3.4% { transform: matrix3d(1.008, 0, 0, 0, 0, 1.01, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.7% { transform: matrix3d(1.011, 0, 0, 0, 0, 1.015, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  6.81% { transform: matrix3d(1.016, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  9.41% { transform: matrix3d(1.022, 0, 0, 0, 0, 1.029, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  10.21% { transform: matrix3d(1.024, 0, 0, 0, 0, 1.031, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  13.61% { transform: matrix3d(1.028, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  14.11% { transform: matrix3d(1.029, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  17.52% { transform: matrix3d(1.03, 0, 0, 0, 0, 1.031, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  18.72% { transform: matrix3d(1.03, 0, 0, 0, 0, 1.03, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  21.32% { transform: matrix3d(1.03, 0, 0, 0, 0, 1.027, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  24.32% { transform: matrix3d(1.029, 0, 0, 0, 0, 1.024, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  25.23% { transform: matrix3d(1.028, 0, 0, 0, 0, 1.023, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  29.03% { transform: matrix3d(1.027, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  29.93% { transform: matrix3d(1.026, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  35.54% { transform: matrix3d(1.024, 0, 0, 0, 0, 1.024, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  36.74% { transform: matrix3d(1.024, 0, 0, 0, 0, 1.024, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  41.04% { transform: matrix3d(1.024, 0, 0, 0, 0, 1.026, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  44.44% { transform: matrix3d(1.024, 0, 0, 0, 0, 1.026, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  52.15% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  59.86% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  63.26% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  75.28% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  85.49% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  90.69% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform: matrix3d(1.025, 0, 0, 0, 0, 1.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+
+
+
+@media screen and (max-width: 500px){
+	.content{
+	  padding:0px;
+	}
+  .header .title{
+    display:none;
+  }
+}
+
+</style>
+<html>
+<head>
+<meta charset="utf-8"/>
+
+<title>Alumni Job Board | Make School</title>
+
+<meta name="author" content="Hunter John Larco"></meta>
+<meta name="pinterest" content="nohover"></meta>
+<meta content="yes" name="apple-mobile-web-app-capable"></meta>
+<meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+
+<link rel="stylesheet" href="./resources/css/global.css"/>
+<link rel="stylesheet" href="./resources/css/resets.css"/>
+
+</head>
+<body>
+
+
+<div class='header'>
+  <img class='logo' src='./images/logo.svg'/>
+  <div class='title'>Alumni Job Board</div>
+</div>
+
+
+<div class='content'>
+  <div class='card new'>
+    <h1>airbnb</h1>
+    <h2>iOS Engineer</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://airbnb.com'><h3>airbnb.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>No notes submitted</p>
+  </div>
+  <div class='card'>
+    <h1>Twitter</h1>
+    <h2>Frontend Engineer</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://twitter.com'><h3>twitter.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>No notes submitted</p>
+  </div>
+  <div class='card'>
+    <h1>Facebook</h1>
+    <h2>Backend Internship</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://facebook.com'><h3>facebook.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>We're currently looking for a part-time intern to work with our relay team. Experience in reactjs is required.</p>
+  </div>
+  <div class='card'>
+    <h1>IBM</h1>
+    <h2>Backend Ruby Engineer</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://ibm.com'><h3>ibm.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>Seeking a full-time backend developer working our ruby stack in LA. Relocation is possible.</p>
+  </div>
+  <div class='card new'>
+    <h1>SpoonRocket</h1>
+    <h2>iOS Developer</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://spoonrocket.com'><h3>spoonrocket.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>No notes submitted</p>
+  </div>
+  <div class='card'>
+    <h1>GrubHub</h1>
+    <h2>iOS Developer</h2>
+    <div class='line'></div>
+    <a target='blank' href='http://grubhub.com'><h3>grubhub.com</h3></a>
+    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
+    <div class='line'></div>
+    <p>No notes submitted</p>
+  </div>
+</div>
+
+
+<script type='text/javascript'>
+(function(){
+	
+	window.addEventListener('load', Init);
+	
+	function Init(){
+		
+	}
+	
+})();
+</script>
+</body>
+</html>
