@@ -20,7 +20,7 @@ def login():
 
 @app.route('/post')
 def postjob():
-  return render_template('jobposting.html')
+  return render_template('postjob.html')
 
 
 @app.route('/images/<path:filename>')
