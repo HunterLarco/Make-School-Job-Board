@@ -34,11 +34,11 @@ body{
 }
 
 .content{
-  max-width:1200px;
+  max-width:1050px;
   margin:20px auto;
   padding:50px;
   
-  text-align:center;
+  text-align:left;
 }
 .content .card{
   display:inline-block;
@@ -49,6 +49,7 @@ body{
   
   background-color:white;
   color:rgba(0,0,0,0.7);
+  text-align:center;
   
   padding:15px;
   margin:10px;
@@ -117,6 +118,15 @@ body{
 }
 .content .card.new a:hover{
   color:rgba(255,255,255,0.5);
+}
+
+.content .loading{
+  margin-top:30px;
+  
+  text-align:center;
+  font-size:16px;
+  
+  color:rgb(102,102,102);
 }
 
 
@@ -206,6 +216,9 @@ body{
 <link rel="stylesheet" href="./resources/css/global.css"/>
 <link rel="stylesheet" href="./resources/css/resets.css"/>
 
+<script src='//www.parsecdn.com/js/parse-1.6.7.min.js'></script>
+<script src='/resources/scripts/JobPosting.js'></script>
+
 </head>
 <body>
 
@@ -217,60 +230,7 @@ body{
 
 
 <div class='content'>
-  <div class='card new'>
-    <h1>airbnb</h1>
-    <h2>iOS Engineer</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://airbnb.com'><h3>airbnb.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>No notes submitted</p>
-  </div>
-  <div class='card'>
-    <h1>Twitter</h1>
-    <h2>Frontend Engineer</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://twitter.com'><h3>twitter.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>No notes submitted</p>
-  </div>
-  <div class='card'>
-    <h1>Facebook</h1>
-    <h2>Backend Internship</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://facebook.com'><h3>facebook.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>We're currently looking for a part-time intern to work with our relay team. Experience in reactjs is required.</p>
-  </div>
-  <div class='card'>
-    <h1>IBM</h1>
-    <h2>Backend Ruby Engineer</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://ibm.com'><h3>ibm.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>Seeking a full-time backend developer working our ruby stack in LA. Relocation is possible.</p>
-  </div>
-  <div class='card new'>
-    <h1>SpoonRocket</h1>
-    <h2>iOS Developer</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://spoonrocket.com'><h3>spoonrocket.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>No notes submitted</p>
-  </div>
-  <div class='card'>
-    <h1>GrubHub</h1>
-    <h2>iOS Developer</h2>
-    <div class='line'></div>
-    <a target='blank' href='http://grubhub.com'><h3>grubhub.com</h3></a>
-    <a target='blank' href='mailto:John Doe <johndoe@company.com>'><h3>Email Contact</h3></a>
-    <div class='line'></div>
-    <p>No notes submitted</p>
-  </div>
+  <div class='loading'>loading...</div>
 </div>
 
 
@@ -280,8 +240,19 @@ body{
 	window.addEventListener('load', Init);
 	
 	function Init(){
-		
+    JobPosting.all(LoadJobs, JobsError);
 	}
+  
+  function LoadJobs(jobs){
+    const frame = document.querySelector('.content');
+    frame.innerHTML = '';
+    for(var i=0,job; job=jobs[i++];)
+      frame.appendChild(job.cardHTML());
+  }
+  
+  function JobsError(){
+    alert('Error Loading Jobs');
+  }
 	
 })();
 </script>

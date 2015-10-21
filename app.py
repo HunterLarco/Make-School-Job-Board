@@ -10,7 +10,7 @@ from flask import render_template
 
 @app.route('/jobs')
 def showjobs():
-  return render_template('content.html')
+  return render_template('jobs.html')
 
 
 @app.route('/')
