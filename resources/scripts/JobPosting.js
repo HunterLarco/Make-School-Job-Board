@@ -20,8 +20,22 @@
     var html;
     
     
+    self.containsStack = ContainsStack;
+    
     self.cardHTML = CardHTML;
     
+    function ContainsStack(stack){
+      for(var i=0,lang; lang=stack[i++];){
+        var contains = false;
+        for(var j=0,haslang; haslang=attributes.stack[j++];)
+          if(haslang.toLowerCase() == lang.toLowerCase()){
+            contains = true;
+            break;
+          }
+        if(!contains) return false;
+      }
+      return true;
+    }
     
     function CardHTML(){
       if (html !== undefined) return html;

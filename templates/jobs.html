@@ -201,6 +201,16 @@ body{
   }
 }
 
+.header .query{
+  float:right;
+  display:inline-block;
+  vertical-align:middle;
+  
+  width:500px;
+  
+  border:1px solid rgb(200,200,200);
+}
+
 </style>
 <html>
 <head>
@@ -213,11 +223,14 @@ body{
 <meta content="yes" name="apple-mobile-web-app-capable"></meta>
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport"></meta>
 
-<link rel="stylesheet" href="./resources/css/global.css"/>
-<link rel="stylesheet" href="./resources/css/resets.css"/>
+<link rel="stylesheet" href="/resources/css/global.css"/>
+<link rel="stylesheet" href="/resources/css/resets.css"/>
 
 <script src='//www.parsecdn.com/js/parse-1.6.7.min.js'></script>
 <script src='/resources/scripts/JobPosting.js'></script>
+
+<link rel="stylesheet" href="/resources/css/selector.css"/>
+<script src='/resources/scripts/selector.js'></script>
 
 </head>
 <body>
@@ -226,6 +239,7 @@ body{
 <div class='header'>
   <img class='logo' src='./images/logo.svg'/>
   <div class='title'>Alumni Job Board</div>
+  <div tabindex='4' class='query selector' name='form-stack' placeholder='Stack'></div>
 </div>
 
 
@@ -236,16 +250,54 @@ body{
 
 <script type='text/javascript'>
 (function(){
+  
+  var jobs = [];
 	
 	window.addEventListener('load', Init);
 	
 	function Init(){
+    LoadQueryField();
+    
+    console.log('Loading Jobs');
     JobPosting.all(LoadJobs, JobsError);
 	}
   
-  function LoadJobs(jobs){
+  function LoadQueryField(){
+    var query = document.querySelector('.query');
+    var selector = new Selector(query, []);
+    
+    selector.onchange = UpdateSearchQuery;
+  }
+  function UpdateSearchQuery(selector){
+    var stack = selector.getValues();
+    var eligible = SearchJobsByStack(stack);
+    
+    for(var i=0,job; job=jobs[i++];)
+      if(eligible.indexOf(job) === -1){
+        job.cardHTML().setAttribute('class', 'card');
+      }else{
+        job.cardHTML().setAttribute('class', 'card new');
+      }
+  }
+  function SearchJobsByStack(stack){
+    if(stack.length === 0) return [];
+    
+    var eligible = [];
+    
+    for(var i=0,job; job=jobs[i++];)
+      if(job.containsStack(stack))
+        eligible.push(job);
+    
+    return eligible;
+  }
+  
+  function LoadJobs(_jobs){
+    _jobs.reverse();
+    jobs = _jobs;
+    
     const frame = document.querySelector('.content');
     frame.innerHTML = '';
+    
     for(var i=0,job; job=jobs[i++];)
       frame.appendChild(job.cardHTML());
   }

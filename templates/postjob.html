@@ -138,81 +138,6 @@ body{
   color:rgb(32,90,101);
 }
 
-.login .stack{
-  display:block;
-  
-  line-height:auto;
-  padding:7px 9px;
-  margin:8px 0px;
-  
-  width:100%;
-  box-sizing: border-box;
-  background:rgb(255,255,255);
-  
-  border-radius:3px;
-  border:none;
-  outline:none;
-  
-  cursor:text;
-}
-.login .stack .item{
-  display:inline-block;
-  vertical-align:middle;
-  
-  background:rgb(240,240,240);
-  
-  margin:3px;
-  padding:0px 0px 0px 7px;
-  
-  font-size:11px;
-  font-weight:bold;
-  
-  border-radius:3px;
-  overflow:hidden;
-  
-  cursor:pointer;
-}
-.login .stack .item:hover::after{
-  background:rgb(205,205,205);
-}
-.login .stack .item::after{
-  display:inline-block;
-  content:'\2297';
-  
-  margin-left:7px;
-  padding:2px 7px;
-  
-  font-size:15px;
-  font-weight:normal;
-  
-  background:rgb(225,225,225);
-}
-.login .stack .item.selected{
-  background:rgb(215,215,215);
-}
-
-.login .stack span,
-.login .stack label{
-  display:inline-block;
-  vertical-align:middle;
-  
-  margin-left:5px;
-  font-size:15px;
-  min-width:1px;
-  
-  border-radius:3px;
-  
-  cursor:text;
-}
-.login .stack label{
-  margin:0px;
-  color:rgb(180,180,180);
-}
-.login .stack label::after{
-  content:'\a0\21a6';
-}
-
-
 </style>
 <html>
 <head>
@@ -225,11 +150,14 @@ body{
 <meta content='yes' name='apple-mobile-web-app-capable'></meta>
 <meta content='minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no' name='viewport'></meta>
 
-<link rel='stylesheet' href='./resources/css/global.css'/>
-<link rel='stylesheet' href='./resources/css/resets.css'/>
+<link rel='stylesheet' href='/resources/css/global.css'/>
+<link rel='stylesheet' href='/resources/css/resets.css'/>
 
 <script src='//www.parsecdn.com/js/parse-1.6.7.min.js'></script>
 <script src='/resources/scripts/JobPosting.js'></script>
+
+<link rel="stylesheet" href="/resources/css/selector.css"/>
+<script src='/resources/scripts/selector.js'></script>
 
 </head>
 <body>
@@ -247,7 +175,7 @@ body{
   <input tabindex='1' type='text' name='form-title' placeholder='Job Title'/>
   <input tabindex='2' type='text' name='form-company' placeholder='Company'/>
   <input tabindex='3' type='text' name='form-url' placeholder='URL'/>
-  <div tabindex='4' class='stack' name='form-stack' placeholder='Stack'></div>
+  <div tabindex='4' class='selector' name='form-stack' placeholder='Stack'></div>
   <input tabindex='5' type='text' name='form-fullname' placeholder='Contact Name'/>
   <input tabindex='6' type='text' name='form-email' placeholder='Contact Email'/>
   <textarea tabindex='7' default='No notes submitted' placeholder='Notes • optional' name='form-notes' resize='noresize'></textarea>
@@ -261,133 +189,6 @@ body{
 (function(){
   
   const languages = ['Django', 'Javascript', 'Java', 'Python', 'CSS', 'PHP', 'Ruby', 'C++', 'C', 'Shell', 'C#', 'Objective-C', 'R', 'VimL', 'Go', 'Perl', 'CoffeeScript', 'TeX', 'Scala', 'Emacs Lisp', 'Haskell', 'Lua', 'Clojure', 'Matlab', 'Arduino', 'Groovy', 'Puppet', 'Swift', 'Node.js', 'Ruby on Rails']
-  
-  function Selector(){
-    var self = this;
-    
-    
-    var frame;
-    var input;
-    var autocomplete;
-    
-    var placeholder;
-    
-    var saved = [];
-    
-    
-    self.getValues = GetValues;
-    self.getPartialValue = GetPartialValue;
-    
-    
-    function GetValues(){
-      return saved.map(function(item){return item.lang;});
-    }
-    function GetPartialValue(){
-      return input.innerHTML.replace(/&nbsp/g, ' ');
-    }
-    
-    
-    function OnFocus(){
-      input.focus();
-    }
-    
-    function OnKeyDown(event){
-      var keycode = event.keyCode;
-      var character = String.fromCharCode(keycode);
-      if(!character.match(/[a-zA-Z0-9\-\_\s]/)) character = '';
-      
-      var value = input.innerHTML + character;
-      if(keycode == 8) value = value.slice(0,-1);
-      
-      if(keycode == 13){
-        event.preventDefault();
-        AddSaved();
-      }else{
-        AutoComplete(value);
-      }
-    }
-    function OnKeyUp(){
-      AutoComplete(input.innerHTML);
-    }
-    
-    function AddSaved(){
-      var value = input.innerHTML;
-      if(!value) return;
-      
-      var lang = GetExpectedLanguage(value);
-      if(!lang) lang = value;
-      
-      var item = document.createElement('div');
-      item.setAttribute('class', 'item');
-      item.innerHTML = lang;
-      item.lang = lang;
-      
-      item.addEventListener('click', function(){
-        RemoveItem(item);
-      });
-      
-      saved.push(item);
-      frame.insertBefore(item, input);
-      
-      input.innerHTML = '';
-      autocomplete.innerHTML = placeholder;
-    }
-    function RemoveItem(item){
-      item.parentElement.removeChild(item);
-      
-      var index = saved.indexOf(item);
-      if(index == -1) return;
-      saved.splice(index, 1);
-    }
-    
-    function GetExpectedLanguage(value){
-      value = value.toLowerCase().replace(/&nbsp;/g, ' ');
-      
-      var langs = [];
-      for(var i=0,lang; lang=languages[i++];)
-        if(lang.toLowerCase().indexOf(value) == 0)
-          langs.push(lang);
-      
-      return langs[0];
-    }
-    function AutoComplete(value){
-      if(!value){
-        autocomplete.innerHTML = placeholder;
-        return;
-      }
-      
-      autocomplete.innerHTML = '';
-      value = value.replace(/&nbsp;/g, ' ');
-      
-      var lang = GetExpectedLanguage(value);
-      if(!lang) return;
-      
-      autocomplete.innerHTML = lang.slice(value.length).replace(/\s/g, '&nbsp;');
-    }
-    
-    function CreateInputField(){
-      input = document.createElement('span');
-      input.setAttribute('contenteditable', 'true');
-      frame.appendChild(input);
-      
-      autocomplete = document.createElement('label');
-      autocomplete.innerHTML = placeholder;
-      frame.appendChild(autocomplete);
-    }
-    
-    
-    (function Constructor(elem){
-      frame = elem;
-      frame.innerHTML = '';
-      
-      placeholder = frame.getAttribute('placeholder') || '';
-      CreateInputField();
-      
-      frame.addEventListener('focus', OnFocus);
-      input.addEventListener('keydown', OnKeyDown);
-      input.addEventListener('keyup', OnKeyUp);
-    }).apply(this, arguments);
-  }
 	
 	window.addEventListener('load', Init);
 	
@@ -396,7 +197,7 @@ body{
     button.addEventListener('click', SubmitForm);
     
     var stack = document.querySelector('[name=form-stack]');
-    stack.selector = new Selector(stack);
+    stack.selector = new Selector(stack, languages);
 	}
   
   function SubmitForm(){
